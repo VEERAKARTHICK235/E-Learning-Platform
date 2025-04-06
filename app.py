@@ -4,49 +4,73 @@ import json
 import os
 import random
 
+# Initialize app configuration
 st.set_page_config(page_title="AI E-Learning", layout="centered")
 
+# File paths for data storage
 USER_DB_FILE = "users.json"
 PROGRESS_DB_FILE = "progress.json"
 QUIZ_LOG_FILE = "quiz_log.json"
 
+# Initialize JSON files if they don't exist
+for file in [USER_DB_FILE, PROGRESS_DB_FILE, QUIZ_LOG_FILE]:
+    if not os.path.exists(file):
+        with open(file, 'w') as f:
+            json.dump({}, f)
+
+# Data loading functions with error handling
 def load_users():
-    if os.path.exists(USER_DB_FILE):
+    try:
         with open(USER_DB_FILE, "r") as file:
             return json.load(file)
-    return {}
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
 
 def save_users(users):
-    with open(USER_DB_FILE, "w") as file:
-        json.dump(users, file)
+    try:
+        with open(USER_DB_FILE, "w") as file:
+            json.dump(users, file)
+    except Exception as e:
+        st.error(f"Error saving user data: {e}")
 
 def load_progress():
-    if os.path.exists(PROGRESS_DB_FILE):
+    try:
         with open(PROGRESS_DB_FILE, "r") as file:
             return json.load(file)
-    return {}
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
 
 def save_progress(progress):
-    with open(PROGRESS_DB_FILE, "w") as file:
-        json.dump(progress, file)
+    try:
+        with open(PROGRESS_DB_FILE, "w") as file:
+            json.dump(progress, file)
+    except Exception as e:
+        st.error(f"Error saving progress data: {e}")
 
 def load_quiz_log():
-    if os.path.exists(QUIZ_LOG_FILE):
+    try:
         with open(QUIZ_LOG_FILE, "r") as file:
             return json.load(file)
-    return {}
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
 
 def save_quiz_log(log):
-    with open(QUIZ_LOG_FILE, "w") as file:
-        json.dump(log, file)
+    try:
+        with open(QUIZ_LOG_FILE, "w") as file:
+            json.dump(log, file)
+    except Exception as e:
+        st.error(f"Error saving quiz log: {e}")
 
+# Load initial data
 users = load_users()
 progress = load_progress()
 quiz_log = load_quiz_log()
 
+# Password hashing
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
+# Initialize session state
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 if "username" not in st.session_state:
@@ -54,6 +78,7 @@ if "username" not in st.session_state:
 if "quiz_count" not in st.session_state:
     st.session_state.quiz_count = 0
 
+# Authentication UI
 if not st.session_state.logged_in:
     st.title("\U0001F512 Welcome to AI Learning Portal")
     login_tab, signup_tab = st.tabs(["Login", "Signup"])
@@ -67,7 +92,7 @@ if not st.session_state.logged_in:
                 st.session_state.username = username
                 st.session_state.quiz_count = len(quiz_log.get(username, []))
                 st.success("\u2705 Logged in!")
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("\u274C Invalid username or password")
 
@@ -77,33 +102,38 @@ if not st.session_state.logged_in:
         if st.button("🆕 Signup", key="signup_btn"):
             if new_username in users:
                 st.warning("\u26A0\uFE0F Username already exists.")
+            elif not new_username or not new_password:
+                st.warning("Please enter both username and password")
             else:
                 users[new_username] = hash_password(new_password)
                 save_users(users)
                 st.success("\U0001F389 Signup successful! You can log in now.")
 else:
+    # Main application after login
     st.sidebar.write(f"\U0001F44B Hello, {st.session_state.username}")
     if st.sidebar.button("🚪 Logout", key="logout_btn"):
         st.session_state.logged_in = False
         st.session_state.username = ""
-        st.experimental_rerun()
+        st.rerun()
 
-st.markdown("""
-<style>
-.main-title { color: #00ffcc; font-size: 36px; font-weight: bold; text-align: center; }
-.sub-title { color: #66fcf1; text-align: center; font-size: 20px; margin-bottom: 40px; }
-.course-card { background: rgba(255,255,255,0.05); padding: 20px; margin: 15px 0; border-radius: 12px; }
-.btn { background-color: #00adb5; color: white; padding: 10px 20px; border-radius: 8px; }
-</style>
-""", unsafe_allow_html=True)
+    # Custom CSS styling
+    st.markdown("""
+    <style>
+    .main-title { color: #00ffcc; font-size: 36px; font-weight: bold; text-align: center; }
+    .sub-title { color: #66fcf1; text-align: center; font-size: 20px; margin-bottom: 40px; }
+    .course-card { background: rgba(255,255,255,0.05); padding: 20px; margin: 15px 0; border-radius: 12px; }
+    .btn { background-color: #00adb5; color: white; padding: 10px 20px; border-radius: 8px; }
+    </style>
+    """, unsafe_allow_html=True)
 
-st.markdown("<div class='main-title'>\U0001F680 E-Learning Platform</div>", unsafe_allow_html=True)
-st.markdown("<div class='sub-title'>Explore futuristic learning with AI-powered content</div>", unsafe_allow_html=True)
+    st.markdown("<div class='main-title'>\U0001F680 E-Learning Platform</div>", unsafe_allow_html=True)
+    st.markdown("<div class='sub-title'>Explore futuristic learning with AI-powered content</div>", unsafe_allow_html=True)
 
-if st.session_state.logged_in:
+    # Application menu
     menu = ["Home", "Courses", "Video Lessons", "Assignments", "Quiz", "Review Answers", "Dashboard", "Profile"]
     choice = st.sidebar.selectbox("📚 Navigate", menu)
 
+    # Course data
     courses = {
         "Python Basics": "Learn Python from scratch",
         "Data Science": "Explore data analysis techniques",
@@ -114,11 +144,12 @@ if st.session_state.logged_in:
         "Natural Language Processing": "Work with text data",
         "Reinforcement Learning": "Learn agent-based learning",
         "AI Ethics": "Understand ethical implications",
-        "Genarative AI": "Understanding the Gen AI"
+        "Generative AI": "Understanding the Gen AI"
     }
 
     user_progress = progress.get(st.session_state.username, {})
 
+    # Menu options
     if choice == "Home":
         st.markdown("### \U0001F30C Welcome to the E Learning Platform!")
         for course, desc in courses.items():
@@ -146,7 +177,6 @@ if st.session_state.logged_in:
 
     elif choice == "Video Lessons":
         st.subheader("\U0001F3A5 AI Video Lessons")
-
         video_links = {
             "Python Basics": "https://www.youtube.com/watch?v=rfscVS0vtbw",
             "Data Science": "https://www.youtube.com/watch?v=ua-CiDNNj30",
@@ -157,7 +187,7 @@ if st.session_state.logged_in:
             "Natural Language Processing": "https://www.youtube.com/watch?v=dIUTsFT2MeQ",
             "Reinforcement Learning": "https://www.youtube.com/watch?v=2pWv7GOvuf0",
             "AI Ethics": "https://www.youtube.com/watch?v=UwsrzCVZAb8",
-            "Genarative AI": "https://www.youtube.com/watch?v=hHnvo4f35GA"
+            "Generative AI": "https://www.youtube.com/watch?v=hHnvo4f35GA"
         }
 
         for title, link in video_links.items():
@@ -191,16 +221,26 @@ if st.session_state.logged_in:
         st.subheader("\U0001F9E0 Quick Quiz")
         questions = {
             "Python Basics": [
-                ("What is the output of print(2 * 3)?", ["5", "6", "8", "9"], "6", "Basic multiplication in Python.")
+                ("What is the output of print(2 * 3)?", ["5", "6", "8", "9"], "6", "Basic multiplication in Python."),
+                ("Which keyword defines a function in Python?", ["func", "def", "function", "define"], "def", "Python uses 'def' to define functions."),
+                ("What does list.append() do?", ["Adds an item to the end", "Removes an item", "Sorts the list", "Reverses the list"], "Adds an item to the end", "Append adds items to the end of a list.")
             ],
             "Data Science": [
-                ("Which library is commonly used for data manipulation?", ["NumPy", "Pandas", "Flask"], "Pandas", "Pandas provides powerful dataframes.")
+                ("Which library is commonly used for data manipulation?", ["NumPy", "Pandas", "Flask"], "Pandas", "Pandas provides powerful dataframes."),
+                ("What does .head() do in Pandas?", ["Shows first rows", "Shows last rows", "Shows column headers", "Shows data types"], "Shows first rows", "head() displays the first 5 rows by default."),
+                ("Which library is used for plotting?", ["Matplotlib", "Requests", "Scrapy"], "Matplotlib", "Matplotlib is the primary plotting library.")
+            ],
+            "Machine Learning": [
+                ("What is supervised learning?", ["Learning with labeled data", "Learning without guidance", "Learning from rewards"], "Learning with labeled data", "Supervised learning uses labeled training data."),
+                ("What is the purpose of train_test_split?", ["To evaluate model performance", "To clean data", "To visualize data"], "To evaluate model performance", "It splits data into training and test sets.")
             ]
         }
+        
         subject = st.selectbox("Select Subject", list(questions.keys()))
         qlist = questions[subject]
         question, options, correct, explanation = random.choice(qlist)
         user_answer = st.radio(question, options)
+        
         if st.button("✅ Submit Answer", key="submit_answer_btn"):
             user = st.session_state.username
             result = "Correct" if user_answer == correct else "Incorrect"
@@ -214,6 +254,7 @@ if st.session_state.logged_in:
                 "explanation": explanation
             })
             save_quiz_log(quiz_log)
+            
             current_progress = user_progress.get(subject, 0)
             if current_progress < 50:
                 new_progress = min(current_progress + 10, 50)
@@ -221,6 +262,7 @@ if st.session_state.logged_in:
                 progress[st.session_state.username] = user_progress
                 save_progress(progress)
                 st.info(f"\U0001F4C8 Progress updated to {new_progress}% for {subject}")
+            
             if result == "Correct":
                 st.success("\u2705 Correct!")
             else:
@@ -244,18 +286,21 @@ if st.session_state.logged_in:
     elif choice == "Review Answers":
         st.subheader("\U0001F4CB Quiz Review")
         user_logs = quiz_log.get(st.session_state.username, [])
-        filter_option = st.selectbox("Filter", ["All", "Correct", "Incorrect"])
-        for entry in user_logs:
-            if filter_option == "All" or entry["result"] == filter_option:
-                st.markdown(f"""
-                **Subject:** {entry['subject']}  
-                **Q:** {entry['question']}  
-                **Your Answer:** {entry['your_answer']}  
-                **Correct Answer:** {entry['correct_answer']}  
-                **Result:** {entry['result']}  
-                **Explanation:** {entry['explanation']}  
-                ---
-                """)
+        if not user_logs:
+            st.info("No quiz attempts yet")
+        else:
+            filter_option = st.selectbox("Filter", ["All", "Correct", "Incorrect"])
+            for entry in user_logs:
+                if filter_option == "All" or entry["result"] == filter_option:
+                    st.markdown(f"""
+                    **Subject:** {entry['subject']}  
+                    **Q:** {entry['question']}  
+                    **Your Answer:** {entry['your_answer']}  
+                    **Correct Answer:** {entry['correct_answer']}  
+                    **Result:** {entry['result']}  
+                    **Explanation:** {entry['explanation']}  
+                    ---
+                    """)
 
     elif choice == "Dashboard":
         st.subheader("\U0001F4CA Course Progress Dashboard")
