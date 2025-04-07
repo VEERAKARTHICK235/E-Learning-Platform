@@ -143,7 +143,7 @@ else:
         "Computer Vision": "Master image processing",
         "Natural Language Processing": "Work with text data",
         "Reinforcement Learning": "Learn agent-based learning",
-        "AI Ethics": "Understand ethical implications",
+        "The Ethics of AI & ML": "Understand ethical implications",
         "Generative AI": "Understanding the Gen AI"
     }
 
@@ -181,12 +181,12 @@ else:
             "Python Basics": "https://www.youtube.com/watch?v=rfscVS0vtbw",
             "Data Science": "https://www.youtube.com/watch?v=ua-CiDNNj30",
             "Machine Learning": "https://www.youtube.com/watch?v=GwIo3gDZCVQ",
-            "AI for Beginners": "https://www.youtube.com/watch?v=Yq0QkCxoTHM",
-            "Deep Learning": "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi",
-            "Computer Vision": "https://www.youtube.com/watch?v=lgbKpn7q40M",
+            "AI for Beginners": "https://www.youtube.com/watch?v=JMUxmLyrhSk",
+            "Deep Learning": "https://www.youtube.com/watch?v=DooxDIRAkPA",
+            "Computer Vision": "https://www.youtube.com/watch?v=01sAkU_NvOY",
             "Natural Language Processing": "https://www.youtube.com/watch?v=dIUTsFT2MeQ",
-            "Reinforcement Learning": "https://www.youtube.com/watch?v=2pWv7GOvuf0",
-            "AI Ethics": "https://www.youtube.com/watch?v=UwsrzCVZAb8",
+            "Reinforcement Learning": "https://www.youtube.com/watch?v=ELE2_Mftqoc",
+            "The Ethics of AI & ML": "https://www.youtube.com/watch?v=qpp1G0iEL_c",
             "Generative AI": "https://www.youtube.com/watch?v=hHnvo4f35GA"
         }
 
@@ -316,7 +316,7 @@ else:
                 ("What is episode?", ["Interaction run", "Script"], "Interaction run", "From start to terminal."),
                 ("Exploration is?", ["Trying new", "Repeating"], "Trying new", "Explore to discover better actions.")
             ],
-            "AI Ethics": [
+            "The Ethics of AI & ML": [
                 ("AI ethics studies?", ["Right use", "Code bugs"], "Right use", "It's about responsible AI."),
                 ("Bias in AI is?", ["Unfairness", "Feature"], "Unfairness", "Bias harms fairness."),
                 ("Which is ethical?", ["Fair AI", "Spy AI"], "Fair AI", "Fairness is key."),
@@ -342,8 +342,6 @@ else:
             ]
         }
 
-        
-        
         subject = st.selectbox("Select Subject", list(questions.keys()))
         qlist = questions[subject]
         question, options, correct, explanation = random.choice(qlist)
