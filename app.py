@@ -223,18 +223,126 @@ else:
             "Python Basics": [
                 ("What is the output of print(2 * 3)?", ["5", "6", "8", "9"], "6", "Basic multiplication in Python."),
                 ("Which keyword defines a function in Python?", ["func", "def", "function", "define"], "def", "Python uses 'def' to define functions."),
-                ("What does list.append() do?", ["Adds an item to the end", "Removes an item", "Sorts the list", "Reverses the list"], "Adds an item to the end", "Append adds items to the end of a list.")
+                ("What does list.append() do?", ["Adds an item to the end", "Removes an item", "Sorts the list", "Reverses the list"], "Adds an item to the end", "Append adds items to the end of a list."),
+                ("Which of these is a valid variable name?", ["2var", "_var", "var!", "#var"], "_var", "Variable names can't start with numbers or symbols."),
+                ("How do you start a comment in Python?", ["#", "//", "/*", "--"], "#", "Python uses '#' for single-line comments."),
+                ("What data type is [1, 2, 3]?", ["List", "Tuple", "Dict", "Set"], "List", "Square brackets represent lists."),
+                ("What does len() return?", ["Length", "Last element", "Line number", "None"], "Length", "len() returns the number of items."),
+                ("What is the output of bool('False')?", ["False", "True"], "True", "Non-empty strings are truthy."),
+                ("Which keyword is used to loop?", ["for", "while", "repeat", "loop"], "for", "Python uses 'for' and 'while' to loop."),
+                ("What does 'break' do?", ["Exits loop", "Skips iteration", "Repeats loop"], "Exits loop", "'break' exits the loop early.")
             ],
             "Data Science": [
-                ("Which library is commonly used for data manipulation?", ["NumPy", "Pandas", "Flask"], "Pandas", "Pandas provides powerful dataframes."),
-                ("What does .head() do in Pandas?", ["Shows first rows", "Shows last rows", "Shows column headers", "Shows data types"], "Shows first rows", "head() displays the first 5 rows by default."),
-                ("Which library is used for plotting?", ["Matplotlib", "Requests", "Scrapy"], "Matplotlib", "Matplotlib is the primary plotting library.")
+                ("Which library is used for data manipulation?", ["NumPy", "Pandas", "Flask"], "Pandas", "Pandas provides powerful dataframes."),
+                ("What does .head() do?", ["Shows first rows", "Last rows", "Data types"], "Shows first rows", "Displays the first few rows."),
+                ("What is NaN?", ["A number", "Missing value", "String"], "Missing value", "NaN means missing data."),
+                ("Which file format is common in DS?", [".csv", ".exe", ".bin"], ".csv", "CSV files are widely used."),
+                ("How do you import Pandas?", ["import pandas", "load pandas", "install pandas"], "import pandas", "Use import to bring in libraries."),
+                ("What is df.shape?", ["Rows & columns", "File size", "Data types"], "Rows & columns", "Shows dimensions."),
+                ("What does describe() return?", ["Stats summary", "Graph", "Null values"], "Stats summary", "Gives mean, std, etc."),
+                ("Which is not a plot type?", ["bar", "line", "circle"], "circle", "Circle is not standard."),
+                ("What is outlier?", ["Normal data", "Unusual value"], "Unusual value", "Outliers lie far from average."),
+                ("Which method fills NaN?", ["fillna()", "replace()", "dropna()"], "fillna()", "fillna() replaces NaNs.")
             ],
             "Machine Learning": [
-                ("What is supervised learning?", ["Learning with labeled data", "Learning without guidance", "Learning from rewards"], "Learning with labeled data", "Supervised learning uses labeled training data."),
-                ("What is the purpose of train_test_split?", ["To evaluate model performance", "To clean data", "To visualize data"], "To evaluate model performance", "It splits data into training and test sets.")
+                ("What is supervised learning?", ["With labels", "Without guidance"], "With labels", "Uses labeled training data."),
+                ("What is overfitting?", ["Fits training too well", "Fits test only"], "Fits training too well", "It memorizes instead of generalizes."),
+                ("Which lib is for ML?", ["Scikit-learn", "Django", "Tkinter"], "Scikit-learn", "sklearn is ML library."),
+                ("What is model accuracy?", ["Correct predictions %", "Data size"], "Correct predictions %", "Percentage of right answers."),
+                ("Which algorithm is for classification?", ["KNN", "K-Means"], "KNN", "KNN is for classification."),
+                ("Purpose of train_test_split?", ["Evaluate performance", "Plot graph"], "Evaluate performance", "Splits data into sets."),
+                ("Which term means input features?", ["X", "Y", "Z"], "X", "'X' is used for features."),
+                ("Y in ML usually stands for?", ["Target", "Feature", "Label"], "Target", "Y is your label/output."),
+                ("Which is unsupervised?", ["K-Means", "Decision Tree"], "K-Means", "K-Means is for clustering."),
+                ("What does 'fit()' do?", ["Trains model", "Evaluates"], "Trains model", "fit() is used to train.")
+            ],
+            "AI for Beginners": [
+                ("What does AI stand for?", ["Artificial Intelligence", "Actual Interface"], "Artificial Intelligence", "AI = Artificial Intelligence."),
+                ("What is goal of AI?", ["Mimic humans", "Replace humans"], "Mimic humans", "AI tries to mimic cognitive abilities."),
+                ("Which is a type of AI?", ["Narrow AI", "Perfect AI"], "Narrow AI", "Narrow AI is task-specific."),
+                ("What is Turing Test?", ["Test AI thinking", "Test memory"], "Test AI thinking", "Checks if AI mimics human."),
+                ("AI uses which data type?", ["Structured", "Unstructured", "Both"], "Both", "AI uses all data types."),
+                ("What is intelligent agent?", ["Entity that perceives & acts", "Robot only"], "Entity that perceives & acts", "Agent perceives environment."),
+                ("What is NLP?", ["Text analysis", "Video editing"], "Text analysis", "Natural Language Processing."),
+                ("Which is a goal of NLP?", ["Understand language", "Paint pictures"], "Understand language", "NLP helps machines understand text."),
+                ("AI needs data for?", ["Learning", "Guessing"], "Learning", "Data is the fuel for AI."),
+                ("Which is not AI?", ["Calculator", "Chatbot"], "Calculator", "Calculator is not intelligent.")
+            ],
+            "Deep Learning": [
+                ("DL is a subset of?", ["Machine Learning", "Data Entry"], "Machine Learning", "DL is a type of ML."),
+                ("Main element in DL?", ["Neural Network", "Database"], "Neural Network", "Neural nets mimic brain."),
+                ("Which is activation function?", ["ReLU", "SELECT"], "ReLU", "ReLU adds non-linearity."),
+                ("What is epoch?", ["One pass through data", "Data error"], "One pass through data", "Epoch = 1 full pass."),
+                ("Which DL framework?", ["TensorFlow", "Excel"], "TensorFlow", "TensorFlow helps build DL models."),
+                ("DL needs?", ["High data", "Low power"], "High data", "Deep nets need lots of data."),
+                ("Backpropagation is for?", ["Training weights", "Cleaning data"], "Training weights", "It updates weights."),
+                ("CNN is used for?", ["Images", "Audio"], "Images", "CNN = Convolutional Neural Network."),
+                ("RNN is for?", ["Sequences", "Pictures"], "Sequences", "RNNs process sequence data."),
+                ("DL differs from ML in?", ["Depth", "Nothing"], "Depth", "DL uses deeper networks.")
+            ],
+            "Computer Vision": [
+                ("What is CV?", ["Understanding images", "Reading books"], "Understanding images", "Computer Vision = image understanding."),
+                ("Which lib for CV?", ["OpenCV", "Flask"], "OpenCV", "OpenCV is used for image processing."),
+                ("What is image?", ["Matrix", "Text"], "Matrix", "Images are matrix of pixels."),
+                ("Which layer in CNN?", ["Conv", "Dense"], "Conv", "Convolution layers detect features."),
+                ("Edge detection filters?", ["Sobel", "Bubble"], "Sobel", "Sobel detects edges."),
+                ("Resolution is?", ["Clarity", "Speed"], "Clarity", "High resolution = clear image."),
+                ("Object detection finds?", ["Objects", "Colors only"], "Objects", "Detects what is in frame."),
+                ("What is segmentation?", ["Divide image", "Enhance colors"], "Divide image", "Splits image into parts."),
+                ("Image classification is?", ["Assign label", "Crop image"], "Assign label", "Tells what is in image."),
+                ("Face recognition is a?", ["CV Task", "Voice Task"], "CV Task", "CV handles faces.")
+            ],
+            "Natural Language Processing": [
+                ("NLP stands for?", ["Natural Language Processing", "Neural Language Program"], "Natural Language Processing", "NLP = language understanding."),
+                ("Tokenization means?", ["Splitting text", "Joining text"], "Splitting text", "Breaks text into words."),
+                ("Stopwords are?", ["Common words", "Rare words"], "Common words", "Words like 'the', 'is'."),
+                ("Stemming reduces?", ["Words to root", "Words to plural"], "Words to root", "Like 'running' to 'run'."),
+                ("Bag of Words is?", ["Text rep", "Word game"], "Text rep", "BoW is a model for text."),
+                ("TF-IDF means?", ["Term freq-inv doc freq", "File type"], "Term freq-inv doc freq", "Scores word importance."),
+                ("NLP lib in Python?", ["NLTK", "NumPy"], "NLTK", "NLTK is for text."),
+                ("NER finds?", ["Named entities", "Adjectives"], "Named entities", "Names, places, etc."),
+                ("POS tagging is?", ["Grammar tag", "File tag"], "Grammar tag", "Part of Speech tagging."),
+                ("Lemmatization uses?", ["Dictionary", "List"], "Dictionary", "Finds proper root word.")
+            ],
+            "Reinforcement Learning": [
+                ("RL stands for?", ["Reinforcement Learning", "Relative Logic"], "Reinforcement Learning", "RL uses reward systems."),
+                ("What is agent?", ["Learner", "Server"], "Learner", "Agent acts in environment."),
+                ("Reward is?", ["Feedback", "Data"], "Feedback", "Tells how good action is."),
+                ("Action is?", ["Decision", "Reward"], "Decision", "Agent's choice."),
+                ("Policy maps?", ["States to actions", "States to rewards"], "States to actions", "It defines behavior."),
+                ("Q-value is?", ["Action value", "Quality check"], "Action value", "Q = expected return."),
+                ("Environment is?", ["External system", "Code"], "External system", "Where agent acts."),
+                ("Goal of RL?", ["Maximize rewards", "Minimize actions"], "Maximize rewards", "Seeks best outcomes."),
+                ("What is episode?", ["Interaction run", "Script"], "Interaction run", "From start to terminal."),
+                ("Exploration is?", ["Trying new", "Repeating"], "Trying new", "Explore to discover better actions.")
+            ],
+            "AI Ethics": [
+                ("AI ethics studies?", ["Right use", "Code bugs"], "Right use", "It's about responsible AI."),
+                ("Bias in AI is?", ["Unfairness", "Feature"], "Unfairness", "Bias harms fairness."),
+                ("Which is ethical?", ["Fair AI", "Spy AI"], "Fair AI", "Fairness is key."),
+                ("What is transparency?", ["Explain decisions", "Confuse users"], "Explain decisions", "Users must understand AI."),
+                ("Which is concern?", ["Privacy", "Coding speed"], "Privacy", "Data privacy is major issue."),
+                ("Accountability means?", ["Responsibility", "Speed"], "Responsibility", "Who answers for AI."),
+                ("What is fairness?", ["No discrimination", "Fast code"], "No discrimination", "AI should treat all equally."),
+                ("Explainability is?", ["Explain model", "Hide model"], "Explain model", "Users must know why AI acts."),
+                ("Who regulates AI?", ["Govt", "Coders only"], "Govt", "Governments are involved."),
+                ("AI should be?", ["Ethical", "Unrestricted"], "Ethical", "Ethics is a must.")
+            ],
+            "Generative AI": [
+                ("What is Gen AI?", ["Creates content", "Deletes data"], "Creates content", "Gen AI generates new data."),
+                ("Example of Gen AI?", ["ChatGPT", "Excel"], "ChatGPT", "ChatGPT is generative."),
+                ("Gen AI uses?", ["Deep models", "Textbooks"], "Deep models", "Uses complex models."),
+                ("GANs stand for?", ["Generative Adversarial Networks", "Graphics and Networks"], "Generative Adversarial Networks", "GANs are used in Gen AI."),
+                ("Which is LLM?", ["Large Language Model", "Long List"], "Large Language Model", "ChatGPT is an LLM."),
+                ("Diffusion models are for?", ["Image Gen", "Text edit"], "Image Gen", "Stable Diffusion uses it."),
+                ("Which creates art?", ["DALL·E", "MySQL"], "DALL·E", "DALL·E generates images."),
+                ("AI hallucination is?", ["Wrong output", "Dreaming"], "Wrong output", "It makes things up."),
+                ("Which model for text?", ["GPT", "CNN"], "GPT", "Generative Pre-trained Transformer."),
+                ("Gen AI risks?", ["Misinformation", "Better answers"], "Misinformation", "It may generate false content.")
             ]
         }
+
+        
         
         subject = st.selectbox("Select Subject", list(questions.keys()))
         qlist = questions[subject]
