@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main() {
+    int pid = fork();  // Create child
+
+    if (pid == 0) {
+        printf("This is the Child Process\n");
+    } else {
+        wait(NULL);  // Parent waits
+        printf("This is the Parent Process\n");
+    }
+
+    return 0;
+}
+
+
+
+
+#include <stdio.h>
+#include <pthread.h>
+#include <semaphore.h>
+
+sem_t sem;
+int value = 0;
+
+void* task(void* arg) {
+    sem_wait(&sem);  // Lock
+    value++;
+    printf("Value: %d\n", value);
+    sem_post(&sem);  // Unlock
+    return NULL;
+}
+
+int main() {
+    pthread_t t1, t2;
+
+    sem_init(&sem, 0, 1);  // Init semaphore
+
+    pthread_create(&t1, NULL, task, NULL);
+    pthread_create(&t2, NULL, task, NULL);
+
+    pthread_join(t1, NULL);
+    pthread_join(t2, NULL);
+
+    sem_destroy(&sem);  // Cleanup
+    return 0;
+}
