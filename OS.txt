@@ -18,6 +18,16 @@ int main() {
 
 
 
+Declare a shared counter variable.
+
+2. Initialize a semaphore to 1.
+
+3. Create threads that increment the counter.
+
+4. Use sem_wait() before critical section and sem_post() after.
+
+5. Join threads and destroy the semaphore.
+
 #include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
@@ -32,6 +42,7 @@ void* task(void* arg) {
     sem_post(&sem);  // Unlock
     return NULL;
 }
+
 
 int main() {
     pthread_t t1, t2;
